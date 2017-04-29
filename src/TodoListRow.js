@@ -55,7 +55,7 @@ class TodoListRow extends React.Component {
                         {this.renderButtonSection()}
                     </div>
                     <div className="col-md-1 vertical-center x-button-div">
-                        <button onClick={this.onDeleteClick.bind(this)} type="button" className="close btn" aria-label="Close">
+                        <button onClick={this.props.deleteItem.bind(this, this.props.id)} type="button" className="close btn" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
@@ -81,9 +81,6 @@ class TodoListRow extends React.Component {
         this.setState({isEditing: false});
     }
 
-    onDeleteClick(){
-
-    }
 }
 
 export default TodoListRow;

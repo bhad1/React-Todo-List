@@ -20,7 +20,7 @@ class App extends React.Component {
                 <TodoList
                     items={this.state.items}
                     saveText={this.saveText.bind(this)}
-                    {/*// deleteItem={this.deleteItem.bind(this)}*/}
+                    deleteItem={this.deleteItem.bind(this)}
                 />
 
                 <form onSubmit={this.handleSubmit}>
@@ -53,6 +53,11 @@ class App extends React.Component {
         const foundTodo = _.find(this.state.items, item => item.text === oldText);
         foundTodo.text = newText;
         this.setState({state: this.state.text});
+    }
+
+    deleteItem(deleteItemId){
+        _.remove(this.state.items, item => item.id === deleteItemId );
+        this.setState({state: this.state.items});
     }
 }
 

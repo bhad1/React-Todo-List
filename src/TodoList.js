@@ -14,7 +14,7 @@ class TodoList extends React.Component {
     renderItems() {
         const props = _.omit(this.props, 'items');
 
-        return _.map(this.props.items, (item, index) => <TodoListRow key={index} itemText={item.text} saveText={this.props.saveText.bind(this)} {...item} {...props} />);
+        return _.map(this.props.items, (item, index) => <TodoListRow key={index} itemText={item.text} saveText={this.props.saveText.bind(this)} deleteItem={this.props.deleteItem.bind(this)} {...item} {...props} />);
     }
 
 
