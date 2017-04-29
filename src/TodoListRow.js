@@ -5,34 +5,84 @@ import './TodoList.css';
 import TodoListButtons from './TodoListButtons';
 
 class TodoListRow extends React.Component {
-  constructor(props){
-    super(props);
+    constructor(props) {
+        super(props);
 
-    this.state = {
-      taskIsComplete: false
+        //set default editing state to false which shows edit button by default instead of save
+        this.state = {
+            isEditing: false
+        }
     }
-  }
 
-    toggleCompletedTask(){
-      if(this.state.taskIsComplete === false){
-        this.state.taskIsComplete = true
-      } else
+    //handle isEditing state. Switches button from Edit to Save.
+    renderButtonSection() {
+        if (this.state.isEditing) {
+            return (
+                <button onClick={this.onSaveClick.bind(this)} className="btn">Save</button>
+
+            );
+        }
+
+        return (
+            <button onClick={this.onEditClick.bind(this)} className="btn">Edit</button>
+        );
     }
+
+    renderTextSection() {
+        if (this.state.isEditing) {
+            return (
+                <form onSubmit={this.onSaveClick.bind(this)}>
+                    <input type="text" defaultValue={this.props.itemText} ref="editInput"/>
+                </form>
+
+            );
+        }
+
+        return (
+            <div>{this.props.itemText}</div>
+        );
+    }
+
 
     render() {
         return (
-          <div className="row ">
-              <div className="card-block col-md-9">
-                  {item.text}
-              </div>
-              <TodoListButtons />
-              <div className="col-md-1 vertical-center x-button-div">
-                  <button type="button" className="close btn" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                  </button>
-              </div>
-          </div>
+            <div className="card">
+                <div className="row">
+                    <div className="card-block col-md-9">
+                        {this.renderTextSection()}
+                    </div>
+                    <div className="col-md-2 edit-button-div">
+                        {this.renderButtonSection()}
+                    </div>
+                    <div className="col-md-1 vertical-center x-button-div">
+                        <button onClick={this.onDeleteClick.bind(this)} type="button" className="close btn" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
         );
+    }
+
+    //set to edit mode after clicking on edit button
+    onEditClick() {
+        this.setState({
+            isEditing: true
+        });
+    }
+
+    //save changes in edit mode and switch back to default mode
+    onSaveClick(event) {
+        event.preventDefault();
+        const oldText = this.props.itemText;
+        const newText = this.refs.editInput.value;
+        this.props.saveText(oldText, newText);
+        this.setState({isEditing: false});
+    }
+
+    onDeleteClick(){
+
     }
 }
 

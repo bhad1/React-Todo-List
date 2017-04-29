@@ -3,6 +3,7 @@ import logo from './logo.svg';
 import TodoList from './TodoList';
 import {Navbar, Jumbotron, Button} from 'react-bootstrap';
 import './App.css';
+import _ from 'lodash';
 
 class App extends React.Component {
     constructor(props) {
@@ -16,7 +17,11 @@ class App extends React.Component {
         return (
             <div className="container">
 
-                <TodoList items={this.state.items}/>
+                <TodoList
+                    items={this.state.items}
+                    saveText={this.saveText.bind(this)}
+                    {/*// deleteItem={this.deleteItem.bind(this)}*/}
+                />
 
                 <form onSubmit={this.handleSubmit}>
                     <input onChange={this.handleChange} value={this.state.text} placeholder="What do I need to do?"/>
@@ -42,6 +47,12 @@ class App extends React.Component {
             text: '',
             isCompleted: false
         }));
+    }
+
+    saveText(oldText, newText){
+        const foundTodo = _.find(this.state.items, item => item.text === oldText);
+        foundTodo.text = newText;
+        this.setState({state: this.state.text});
     }
 }
 
