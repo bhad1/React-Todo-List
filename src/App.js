@@ -49,8 +49,13 @@ class App extends React.Component {
         }));
     }
 
-    saveText(oldText, newText){
-        const foundTodo = _.find(this.state.items, item => item.text === oldText);
+    // saveText(oldText, newText){
+    //     const foundTodo = _.find(this.state.items, item => item.text === oldText);
+    //     foundTodo.text = newText;
+    //     this.setState({state: this.state.text});
+    // }
+    saveText(oldTextId, newText){
+        const foundTodo = _.find(this.state.items, item => item.id === oldTextId);
         foundTodo.text = newText;
         this.setState({state: this.state.text});
     }

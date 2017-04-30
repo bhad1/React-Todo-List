@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import logo from './logo.svg';
 import {Navbar, Jumbotron, Button} from 'react-bootstrap';
-import './TodoList.css';
+import './TodoListRow.css';
 import TodoListButtons from './TodoListButtons';
 
 class TodoListRow extends React.Component {
@@ -39,7 +39,7 @@ class TodoListRow extends React.Component {
         }
 
         return (
-            <div>{this.props.itemText}</div>
+            <div><span className="todoText">{this.props.itemText}</span></div>
         );
     }
 
@@ -48,7 +48,7 @@ class TodoListRow extends React.Component {
         return (
             <div className="card">
                 <div className="row">
-                    <div className="card-block col-md-9">
+                    <div onClick={this.onToggleCompleted.bind(this, this.props.isCompleted)} className="card-block col-md-9">
                         {this.renderTextSection()}
                     </div>
                     <div className="col-md-2 edit-button-div">
@@ -75,10 +75,14 @@ class TodoListRow extends React.Component {
     //save changes in edit mode and switch back to default mode
     onSaveClick(event) {
         event.preventDefault();
-        const oldText = this.props.itemText;
+        const oldTextId = this.props.id;
         const newText = this.refs.editInput.value;
-        this.props.saveText(oldText, newText);
+        this.props.saveText(oldTextId, newText);
         this.setState({isEditing: false});
+    }
+
+    onToggleCompleted(isCompleted){
+
     }
 
 }
