@@ -21,6 +21,7 @@ class App extends React.Component {
                     items={this.state.items}
                     saveText={this.saveText.bind(this)}
                     deleteItem={this.deleteItem.bind(this)}
+                    toggleCompletedItem={this.toggleCompletedItem.bind(this)}
                 />
 
                 <form onSubmit={this.handleSubmit}>
@@ -54,6 +55,14 @@ class App extends React.Component {
     //     foundTodo.text = newText;
     //     this.setState({state: this.state.text});
     // }
+
+    toggleCompletedItem(toggledItemId){
+        const foundTodo = _.find(this.state.items, item => item.id === toggledItemId);
+        foundTodo.isCompleted = !foundTodo.isCompleted;
+        console.log(foundTodo.isCompleted)
+        this.setState({state: this.state.isCompleted})
+    }
+
     saveText(oldTextId, newText){
         const foundTodo = _.find(this.state.items, item => item.id === oldTextId);
         foundTodo.text = newText;

@@ -1,3 +1,9 @@
 .todoText{
     cursor: pointer;
 }
+.completed{
+    color: #5cb85c;;
+}
+.notCompleted{
+    color: #d43f3a;;
+}

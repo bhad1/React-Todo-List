@@ -37,18 +37,22 @@ class TodoListRow extends React.Component {
 
             );
         }
+        else if (this.props.isCompleted && !this.state.isEditing){
+            return(<div><span className="todoText completed">{this.props.itemText}</span></div>)
+        }
 
         return (
-            <div><span className="todoText">{this.props.itemText}</span></div>
+            <div><span className="todoText notCompleted">{this.props.itemText}</span></div>
         );
     }
+
 
 
     render() {
         return (
             <div className="card">
                 <div className="row">
-                    <div onClick={this.onToggleCompleted.bind(this, this.props.isCompleted)} className="card-block col-md-9">
+                    <div onClick={this.props.toggleCompletedItem.bind(this, this.props.id)} className="card-block col-md-9">
                         {this.renderTextSection()}
                     </div>
                     <div className="col-md-2 edit-button-div">
@@ -79,10 +83,6 @@ class TodoListRow extends React.Component {
         const newText = this.refs.editInput.value;
         this.props.saveText(oldTextId, newText);
         this.setState({isEditing: false});
-    }
-
-    onToggleCompleted(isCompleted){
-
     }
 
 }
