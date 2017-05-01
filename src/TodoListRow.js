@@ -52,7 +52,7 @@ class TodoListRow extends React.Component {
         return (
             <div className="card">
                 <div className="row">
-                    <div onClick={this.props.toggleCompletedItem.bind(this, this.props.id)} className="card-block col-md-9">
+                    <div onClick={this.toggleCompletedItem.bind(this, this.props.id)} className="card-block col-md-9">
                         {this.renderTextSection()}
                     </div>
                     <div className="col-md-2 edit-button-div">
@@ -67,6 +67,12 @@ class TodoListRow extends React.Component {
             </div>
 
         );
+    }
+
+    toggleCompletedItem(toggledItemId){
+      if(this.state.isEditing === false){
+        this.props.toggleCompletedItem(toggledItemId);
+      }
     }
 
     //set to edit mode after clicking on edit button

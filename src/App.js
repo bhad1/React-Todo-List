@@ -59,7 +59,6 @@ class App extends React.Component {
     toggleCompletedItem(toggledItemId){
         const foundTodo = _.find(this.state.items, item => item.id === toggledItemId);
         foundTodo.isCompleted = !foundTodo.isCompleted;
-        console.log(foundTodo.isCompleted)
         this.setState({state: this.state.isCompleted})
     }
 
